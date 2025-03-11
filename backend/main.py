@@ -4,6 +4,16 @@ import os
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Allow only your frontend dev URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods like GET, POST, etc.
+    allow_headers=["*"],  # Allow all headers
+)
+
 HF_TOKEN = os.getenv("HF_TOKEN")
 HF_API_URL = "https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M"
 
